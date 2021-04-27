@@ -1,30 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/index">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <!-- <router-link class="nav-link" to="/page">Page</router-link> -->
+            <router-link class="nav-link" :to="{ name: '分頁'}">Page</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <img src="./assets/logo.png" />
     <!-- <HelloWorld/> -->
-
-    <router-view></router-view><!-- 呈現元件的地方 -->
+    <router-view></router-view
+    ><!-- 呈現元件的地方 -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import HelloWorld from "./components/HelloWorld";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
