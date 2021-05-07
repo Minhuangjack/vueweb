@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  lang="zh_TW">
+  <head>
+    <title>Vue vue-slim-tabs DEMO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@<3.0.0/dist/vee-validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/locale/zh_TW.js"></script>
+  </head>
+  <body>
+
+    <br/><br/><br/><br/><br/>
+    <div id="app2">
+      驗證測試<br/>
+      {{inputemail}}<br/>
+      <input type="text" v-model="inputemail" name="aaa" v-validate="'required|email'" /><br/>
+      <span style="color:red">{{ errors.first('aaa') }}</span><br/>
+      <span style="color:red" v-if="errors.has('aaa')">這是自定義錯誤訊息</span>
+    </div>
+    
+    <script>
+      Vue.use(VeeValidate);
+      VeeValidate.Validator.localize('zh_TW');
+            
+      var app2 = new Vue({
+        el: '#app2',
+        data: {
+          inputemail:''
+        }
+      })
+    </script>
+  </body>
+</html>
