@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html  lang="zh_TW">
+  <head>
+    <title>Vue vue-slim-tabs DEMO</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@<3.0.0/dist/vee-validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/locale/zh_TW.js"></script>
+  </head>
+  <body>
+
+    <br/><br/><br/><br/><br/>
+    <div id="app2">
+      驗證測試<br/>
+      <!--
+      {{inputemail}}<br/>
+      <input type="text" v-model="inputemail" name="aaa" v-validate="'required|email'" /><br/>
+      <span style="color:red">{{ errors.first('aaa') }}</span><br/>
+      <span style="color:red" v-if="errors.has('aaa')">這是自定義錯誤訊息</span>
+      
+      <input type="text" name="falsy" v-validate="'falsy'" ><br/>
+      <span style="color:red">{{ errors.first('falsy') }}</span><br/>
+      <span style="color:red">{{ errors.has('falsy') }}</span><br/>
+
+      <input type="text" name="truthy" v-validate="'truthy'" ><br/>
+      <span style="color:red">{{ errors.first('truthy') }}</span><br/>
+      <span style="color:red">{{ errors.has('truthy') }}</span><br/>
+       -->
+        <div class="form-group">
+          <label for="formCoupon">Coupon:</label>
+          <input type="text" name="coupon"  id="formCoupon" 
+                  v-validate="'required|verify_coupon'" v-bind:class="{'form-control': true, 'error': errors.has('coupon') }"> 
+          <span v-show="errors.has('coupon')" class="text-danger">{{ errors.first('coupon') }}</span>
+        </div> 
+     
+    </div>
+    
+    <script>
+      Vue.use(VeeValidate);
+      VeeValidate.Validator.localize('zh_TW');
+      /*
+      VeeValidate.Validator.extend('truthy', {
+        getMessage: field => 'The 123' + field + ' value is not truthy.',
+        validate: value => !! value
+        
+        // validator:'truthy',
+        // getMessage(field, args, data){
+
+        //   return 'The 123' + ' value is not truthy.'
+        // },
+        
+        // validate(value){          
+        //   return true
+        // }
+        });
+      */
+      let instance = new VeeValidate.Validator({ trueField: 'truthy' });
+      instance.extend('falsy', (value) => ! value);
+      instance.attach({
+        name: 'falseField',
+        rules: 'falsy'
+      });
+      
+      VeeValidate.Validator.extend('truthy', {
+        getMessage: field => 'The 123' + field + ' value is not truthy.',
+        validate: value => !! value        
+        });      
+      VeeValidate.Validator.extend('verify_coupon', {
+      getMessage: (field) => 'The 123' + field + ' value is not truthy.',
+      validate: (value) => new Promise(resolve => {
+        const validCoupons = ['SUMMER2017', 'WINTER2017', 'FALL2017'];
+        resolve({
+            valid: value && (validCoupons.indexOf(value.toUpperCase()) > -1)
+          });
+      })
+    });
+      
+      var app2 = new Vue({
+        el: '#app2',
+        data: {
+          inputemail:''
+        }
+      })
+    </script>
+  </body>
+</html>
