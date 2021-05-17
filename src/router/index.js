@@ -10,11 +10,13 @@ import Page from '@/components/pages/page';
 import Child from '@/components/pages/child';
 import Child2 from '@/components/pages/child2';
 import Child3 from '@/components/pages/child3';
+import Menu from '@/components/pages/menu';
 //啟用
 Vue.use(VueRouter);
 
 
-export default new VueRouter({    
+export default new VueRouter({
+    mode:'history',
     routes:[
         {
             name: '首頁', // 元件會呈現的名稱
@@ -22,9 +24,13 @@ export default new VueRouter({
             component: Home, // 對應的元件
         },
         {
-            name: '分頁', // 元件會呈現的名稱
+            // name: '分頁', // 元件會呈現的名稱
             path: '/page', // 虛擬的路徑
-            component: Page, // 對應的元件
+            // component: Page, // 對應的元件
+            components: {       // 可以載入多個元件
+                default: Page,
+                menu: Menu,
+            },
             children:[
                 {
                     name: '卡片 1', // 元件會呈現的名稱
@@ -38,7 +44,7 @@ export default new VueRouter({
                 },
                 {
                     name: '卡片 3', // 元件會呈現的名稱
-                    path: 'Child3', // 虛擬的路徑
+                    path: 'Child/', // 虛擬的路徑
                     component: Child3, // 對應的元件
                 },
             ],

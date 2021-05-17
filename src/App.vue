@@ -8,16 +8,19 @@
             <router-link class="nav-link" to="/index">Home</router-link>
           </li>
           <li class="nav-item">
-            <!-- <router-link class="nav-link" to="/page">Page</router-link> -->
-            <router-link class="nav-link" :to="{ name: '分頁'}">Page</router-link>
+            <router-link class="nav-link" to="/page">Page</router-link>
+            <!-- <router-link class="nav-link" :to="{ name: '分頁'}">Page</router-link> -->
           </li>
         </ul>
       </div>
     </nav>
-    <img src="./assets/logo.png" />
+    <!-- <img src="./assets/logo.png" /> -->
     <!-- <HelloWorld/> -->
-    <router-view></router-view
-    ><!-- 呈現元件的地方 -->
+    <router-view name="menu"></router-view>
+    <div class="container">
+      <router-view></router-view>
+      <!-- 呈現元件的地方 -->
+    </div>
   </div>
 </template>
 
